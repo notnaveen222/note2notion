@@ -1,0 +1,4 @@
+n2n notion
+oauth client id: 239d872b-594c-802b-8aea-00377d6427c1
+oauth client secret: secret_G115zsVjvUkHUILp7wo3t8vqeroD9PvaF2XHdcRYYw4
+auth url: https://api.notion.com/v1/oauth/authorize?client_id=239d872b-594c-802b-8aea-00377d6427c1&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Foauth%2Fcallback
