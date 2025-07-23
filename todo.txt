@@ -1,0 +1,6 @@
+to implement:
+- on user pressing cancel in oauth notion, (r/docs: https://developers.notion.com/docs/authorization)
+- success screen, dashboard (either)
+
+
+(optional):
