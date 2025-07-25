@@ -1,4 +1,3 @@
-// app/lib/cors.ts
 export function corsHeaders(origin?: string) {
   const allowed = [
     /^chrome-extension:\/\//, // Allow any Chrome extension
@@ -8,7 +7,8 @@ export function corsHeaders(origin?: string) {
     typeof entry === "string" ? entry === origin : entry.test(origin || "")
   );
   return {
-    "Access-Control-Allow-Origin": isAllowed ? origin! : allowed[1],
+    "Access-Control-Allow-Origin":
+      isAllowed && origin ? origin : "https://notetonotion.vercel.app",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
