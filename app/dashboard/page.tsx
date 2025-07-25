@@ -1,6 +1,5 @@
 //data avail: name, pfp (if null, set default),workspace name?
-import Image from "next/image";
-
+import LogoutButton from "./component/Logout";
 const sampleData = {
   name: "Naveen",
   avatar_url:
@@ -20,9 +19,7 @@ export default function Dashboard() {
             width={100}
             className="rounded-full size-12"
           ></img> */}
-          <button className="border border-white rounded-lg px-3 py-2 cursor-pointer">
-            Logout
-          </button>
+          <LogoutButton />
         </div>
       </div>
       <div className="flex flex-col items-center gap-y-3 w-fit px-3 py-5 mx-auto mt-10 bg-dark-gray rounded-xl border border-white/70">
