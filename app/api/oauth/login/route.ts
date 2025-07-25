@@ -4,7 +4,7 @@ export async function GET(req: NextRequest) {
   const origin = req.headers.get("origin") || undefined;
   const params = new URLSearchParams({
     client_id: process.env.OAUTH_CLIENT_ID ?? "",
-    redirect_uri: process.env.NOTION_REDIRECT_URI ?? "",
+    redirect_uri: "https://notetonotion.vercel.app/api/oauth/callback",
     response_type: "code",
     owner: "user",
   });

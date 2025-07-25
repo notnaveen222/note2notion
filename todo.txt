@@ -2,5 +2,5 @@ to implement:
 - on user pressing cancel in oauth notion, (r/docs: https://developers.notion.com/docs/authorization)
 - success screen, dashboard (either)
 - remove console logs
-
+- env redirect uri not working, hardcoded for now
 (optional):

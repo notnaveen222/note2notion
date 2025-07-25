@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
       {
         code: userCode,
         grant_type: "authorization_code",
-        redirect_uri: process.env.NOTION_REDIRECT_URI,
+        redirect_uri: "https://notetonotion.vercel.app/api/oauth/callback",
       },
       {
         auth: {
