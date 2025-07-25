@@ -1,31 +1,10 @@
-"use client";
-import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import AuthSuccessContent from "./AuthSuccessContent";
 
-export default function AuthSuccess() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  useEffect(() => {
-    const notion_id = searchParams.get("notion_id");
-    //storing in ext for hitting backend
-    if (notion_id) {
-      window.postMessage({
-        type: "SAVE_NOTION_ID",
-        notion_id: notion_id,
-      });
-
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 500);
-    }
-  }, [searchParams, router]);
+export default function AuthSuccessPage() {
   return (
-    <div className="h-screen w-full flex justify-center items-center">
-      <div className="text-white font-semibold text-lg">
-        Authorization Successful, Redirecting..
-      </div>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthSuccessContent />
+    </Suspense>
   );
 }
