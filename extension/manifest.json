@@ -1,0 +1,26 @@
+{
+  "name": "note2notion",
+  "description": "Seamlessly save content from your browser to your Notion workspace with a simple right-click.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
+  "icons": {
+    "16": "./icons/icon-16.png",
+    "48": "./icons/icon-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:3000/*"],
+      "js": ["source/content.js"],
+      "host_permissions": ["http://localhost:3000/*"]
+    }
+  ],
+  "background": {
+    "service_worker": "./source/background.js"
+  },
+  "action": {
+    "default_popup": "./source/index.html",
+    "default_icon": "./icons/icon-48.png",
+    "default_title": "Highlight any text in browser to note to notion"
+  }
+}

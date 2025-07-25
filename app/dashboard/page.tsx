@@ -1,12 +1,32 @@
 //data avail: name, pfp (if null, set default),workspace name?
+"use client";
+import { useEffect, useState } from "react";
 import LogoutButton from "./component/Logout";
+import axios from "axios";
+
 const sampleData = {
   name: "Naveen",
   avatar_url:
     "https://s3-us-west-2.amazonaws.com/public.notion-static.com/8fa4cb84-902d-45e3-9c89-803d9ca94e56/file_00000000532461f68ff0d422bf33cd17.png",
   workspace: "Naveen's Workspace",
 };
+
+type userDetails = {
+  name: string;
+  avatar_url: string;
+};
+
 export default function Dashboard() {
+  const [userDetails, setUserDetails] = useState<userDetails | null>(null);
+  useEffect(() => {
+    axios
+      .get("/api/user-details")
+      .then((res: any) => setUserDetails(res.data))
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+        setUserDetails(null);
+      });
+  }, []);
   return (
     <div className="h-screen text-white">
       <div className="flex justify-between px-10 items-center py-3 border-b border-b-white/70  w-full ">
@@ -26,12 +46,12 @@ export default function Dashboard() {
         <div>
           <img
             className="h-52 rounded-full"
-            src={sampleData.avatar_url}
+            src={userDetails?.avatar_url}
             alt="user profile picture"
           />
         </div>
         <div className="font-semibold mb-5 text-2xl text-center">
-          {sampleData.name}
+          {userDetails?.name}
         </div>
       </div>
     </div>
