@@ -1,4 +1,3 @@
-import { BASE_URL } from "./config";
 // chrome.runtime.onInstalled.addListener(() => {});
 
 chrome.contextMenus.removeAll(() => {
@@ -52,13 +51,16 @@ async function handleNoteToNotion(info) {
   };
   //console.log(serverPayload);
   try {
-    const response = await fetch(`${BASE_URL}/api/save-to-notion`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(serverPayload),
-    });
+    const response = await fetch(
+      "https://notetonotion.vercel.app/api/save-to-notion",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(serverPayload),
+      }
+    );
   } catch (err) {
     console.log("Error sending data to server", err);
   }
