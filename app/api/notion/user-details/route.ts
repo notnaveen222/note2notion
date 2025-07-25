@@ -4,10 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders } from "@/app/lib/cors";
 
 export async function GET(req: NextRequest) {
-  const origin = req.headers.get("origin") || undefined;
   const notion_id = (await cookies()).get("notion_id")?.value;
   if (!notion_id) {
-    return NextResponse.redirect(`${process.env.BASE_URL}auth`);
+    return NextResponse.redirect("http://localhost:3000/auth");
   }
   const { data, error } = await supabaseAdmin
     .from("users")
@@ -19,14 +18,16 @@ export async function GET(req: NextRequest) {
     console.error(error.message);
     return NextResponse.json(
       { error: "Failed to fetch user" },
-      { status: 500, headers: corsHeaders(origin) }
+      { status: 500, headers: corsHeaders() }
     );
   }
 
-  return NextResponse.json(data, { headers: corsHeaders(origin) });
+  return NextResponse.json(data, { headers: corsHeaders() });
 }
 
 export async function OPTIONS(req: NextRequest) {
-  const origin = req.headers.get("origin") || undefined;
-  return NextResponse.json({}, { headers: corsHeaders(origin) });
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders(),
+  });
 }

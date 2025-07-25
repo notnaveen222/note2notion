@@ -8,7 +8,7 @@ export default function Navbar() {
         onClick={() => {
           router.push("/auth");
         }}
-        className="border cursor-pointer border-white px-5 py-2 rounded-lg text-white text-right"
+        className="border-2 cursor-pointer border-white/65 hover:border-white transition-all duration-150 ease-in-out px-5 py-2 rounded-lg text-white text-right"
       >
         Get Started
       </button>

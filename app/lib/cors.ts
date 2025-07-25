@@ -1,15 +1,7 @@
-export function corsHeaders(origin?: string) {
-  const allowed = [
-    /^chrome-extension:\/\//, // Allow any Chrome extension
-    "https://notetonotion.vercel.app",
-  ];
-  const isAllowed = allowed.some((entry) =>
-    typeof entry === "string" ? entry === origin : entry.test(origin || "")
-  );
+export function corsHeaders() {
   return {
-    "Access-Control-Allow-Origin":
-      isAllowed && origin ? origin : "https://notetonotion.vercel.app",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Origin": "*", // yet to update to "chrome-extension://onhhdhiblkiohnolemldjdolpfnbdgef",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
 }

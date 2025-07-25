@@ -15,6 +15,7 @@ export default function AuthSuccessContent() {
         type: "SAVE_NOTION_ID",
         notion_id: notion_id,
       });
+      console.log("Send Message Block"); //remove on prod
 
       setTimeout(() => {
         router.push("/dashboard");

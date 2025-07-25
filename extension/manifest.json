@@ -11,16 +11,15 @@
   "content_scripts": [
     {
       "matches": ["http://localhost:3000/*"],
-      "js": ["source/content.js"],
-      "host_permissions": ["http://localhost:3000/*"]
+      "js": ["source/content.js"]
     }
   ],
   "background": {
-    "service_worker": "./source/background.js"
+    "service_worker": "source/background.js"
   },
   "action": {
-    "default_popup": "./source/index.html",
-    "default_icon": "./icons/icon-48.png",
+    "default_popup": "source/index.html",
+    "default_icon": "icons/icon-48.png",
     "default_title": "Highlight any text in browser to note to notion"
   }
 }

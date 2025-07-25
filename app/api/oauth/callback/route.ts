@@ -5,10 +5,8 @@ import { cookies } from "next/headers";
 import { corsHeaders } from "@/app/lib/cors";
 
 export async function GET(req: NextRequest) {
-  const BASE_URL = process.env.BASE_URL;
   const { searchParams } = new URL(req.url);
   const userCode = searchParams.get("code");
-  const origin = req.headers.get("origin") || undefined;
 
   try {
     const response = await axios.post(
@@ -16,7 +14,7 @@ export async function GET(req: NextRequest) {
       {
         code: userCode,
         grant_type: "authorization_code",
-        redirect_uri: "https://notetonotion.vercel.app/api/oauth/callback",
+        redirect_uri: process.env.NOTION_REDIRECT_URI_LOCAL,
       },
       {
         auth: {
@@ -49,23 +47,20 @@ export async function GET(req: NextRequest) {
       .upsert([userPayload], { onConflict: "notion_id" });
 
     if (error) {
-      // Optionally handle error, but do not log to console in production
     }
     return NextResponse.redirect(
-      `${BASE_URL}auth-success?notion_id=${notion_id}`
+      `http://localhost:3000/auth-success?notion_id=${notion_id}`
     );
   } catch (err: any) {
-    // Optionally handle error, but do not log to console in production
     return NextResponse.json(
       { error: "OAuth failed" },
-      { status: 500, headers: corsHeaders(origin) }
+      { status: 500, headers: corsHeaders() }
     );
   }
 }
 
 export async function OPTIONS(req: NextRequest) {
-  const origin = req.headers.get("origin") || undefined;
-  return NextResponse.json({}, { headers: corsHeaders(origin) });
+  return NextResponse.json({}, { headers: corsHeaders() });
 }
 
 // //Fetching User Data for dashboard
