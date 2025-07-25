@@ -1,10 +1,12 @@
 import { getNotionAccessToken } from "@/app/lib/notion/getNotionAccessToken";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import { corsHeaders } from "@/app/lib/cors";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const notion_id = body.notion_id;
+  const origin = req.headers.get("origin");
 
   try {
     const access_token = await getNotionAccessToken(notion_id);
@@ -43,12 +45,17 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    return NextResponse.json(pages);
+    return NextResponse.json(pages, { headers: corsHeaders(origin) });
   } catch (error: any) {
     console.error("Failed to fetch Notion pages:", error.message);
     return NextResponse.json(
       { error: "Unable to fetch pages" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders(origin) }
     );
   }
+}
+
+export async function OPTIONS(req: NextRequest) {
+  const origin = req.headers.get("origin");
+  return NextResponse.json({}, { headers: corsHeaders(origin) });
 }

@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { supabaseAdmin } from "@/app/lib/supabase";
 import { cookies } from "next/headers";
+import { corsHeaders } from "@/app/lib/cors";
 
 export async function GET(req: NextRequest) {
+  const BASE_URL = process.env.BASE_URL;
   const { searchParams } = new URL(req.url);
   const userCode = searchParams.get("code");
+  const origin = req.headers.get("origin") || undefined;
+
   try {
     const response = await axios.post(
       "https://api.notion.com/v1/oauth/token",
@@ -37,7 +41,7 @@ export async function GET(req: NextRequest) {
       sameSite: "lax",
       secure: true,
       path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
     });
 
     const { error } = await supabaseAdmin
@@ -45,15 +49,23 @@ export async function GET(req: NextRequest) {
       .upsert([userPayload], { onConflict: "notion_id" });
 
     if (error) {
-      console.log("error inserting in supabase", error.message);
+      // Optionally handle error, but do not log to console in production
     }
     return NextResponse.redirect(
-      `http://localhost:3000/auth-success?notion_id=${notion_id}`
+      `${BASE_URL}auth-success?notion_id=${notion_id}`
     );
   } catch (err: any) {
-    console.log("Token Exchange Failed", err.response?.data || err.message);
-    return NextResponse.json({ error: "OAuth failed" }, { status: 500 });
+    // Optionally handle error, but do not log to console in production
+    return NextResponse.json(
+      { error: "OAuth failed" },
+      { status: 500, headers: corsHeaders(origin) }
+    );
   }
+}
+
+export async function OPTIONS(req: NextRequest) {
+  const origin = req.headers.get("origin") || undefined;
+  return NextResponse.json({}, { headers: corsHeaders(origin) });
 }
 
 // //Fetching User Data for dashboard
