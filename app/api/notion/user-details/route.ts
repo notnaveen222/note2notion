@@ -6,7 +6,7 @@ import { corsHeaders } from "@/app/lib/cors";
 export async function GET(req: NextRequest) {
   const notion_id = (await cookies()).get("notion_id")?.value;
   if (!notion_id) {
-    return NextResponse.redirect("http://localhost:3000/auth");
+    return NextResponse.redirect("https://notetonotion.vercel.app/auth");
   }
   const { data, error } = await supabaseAdmin
     .from("users")

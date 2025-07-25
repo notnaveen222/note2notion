@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
       {
         code: userCode,
         grant_type: "authorization_code",
-        redirect_uri: process.env.NOTION_REDIRECT_URI_LOCAL,
+        redirect_uri: process.env.NOTION_REDIRECT_URI_PROD,
       },
       {
         auth: {
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     if (error) {
     }
     return NextResponse.redirect(
-      `http://localhost:3000/auth-success?notion_id=${notion_id}`
+      `https://notetonotion.vercel.app/auth-success?notion_id=${notion_id}`
     );
   } catch (err: any) {
     return NextResponse.json(

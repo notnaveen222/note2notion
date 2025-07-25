@@ -10,7 +10,7 @@ window.addEventListener("message", async (event) => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/notion/get-pages",
+        "https://notetonotion.vercel.app/api/notion/get-pages",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

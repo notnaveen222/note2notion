@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   const params = new URLSearchParams({
     client_id: process.env.OAUTH_CLIENT_ID ?? "",
-    redirect_uri: process.env.NOTION_REDIRECT_URI_LOCAL ?? "",
+    redirect_uri: process.env.NOTION_REDIRECT_URI_PROD ?? "",
     response_type: "code",
     owner: "user",
   });

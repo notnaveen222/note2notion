@@ -30,7 +30,7 @@ async function handleNoteToNotion(info) {
   };
 
   try {
-    await fetch("http://localhost:3000/api/save-to-notion", {
+    await fetch("https://notetonotion.vercel.app/api/save-to-notion", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(serverPayload),
