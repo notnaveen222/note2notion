@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const origin = req.headers.get("origin") || undefined;
   const notion_id = (await cookies()).get("notion_id")?.value;
   if (!notion_id) {
-    return NextResponse.redirect("https://localhost:3000/auth");
+    return NextResponse.redirect(`${process.env.BASE_URL}auth`);
   }
   const { data, error } = await supabaseAdmin
     .from("users")

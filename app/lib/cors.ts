@@ -2,7 +2,7 @@
 export function corsHeaders(origin?: string) {
   const allowed = [
     "chrome-extension://onhhdhiblkiohnolemldjdolpfnbdgef",
-    "http://localhost:3000",
+    process.env.BASE_URL || "http://localhost:3000",
   ];
   return {
     "Access-Control-Allow-Origin": allowed.includes(origin || "")
