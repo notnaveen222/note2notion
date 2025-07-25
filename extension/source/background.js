@@ -1,3 +1,4 @@
+import { BASE_URL } from "./config";
 // chrome.runtime.onInstalled.addListener(() => {});
 
 chrome.contextMenus.removeAll(() => {
@@ -51,7 +52,7 @@ async function handleNoteToNotion(info) {
   };
   //console.log(serverPayload);
   try {
-    const response = await fetch("http://localhost:3000/api/save-to-notion", {
+    const response = await fetch(`${BASE_URL}/api/save-to-notion`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

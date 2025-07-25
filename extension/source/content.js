@@ -1,3 +1,5 @@
+import { BASE_URL } from "./config";
+
 window.addEventListener("message", async (event) => {
   if (event.source !== window) return;
 
@@ -10,14 +12,11 @@ window.addEventListener("message", async (event) => {
     });
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/notion/get-pages",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ notion_id }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/notion/get-pages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notion_id }),
+      });
       //console.log(response);
       const pages = await response.json();
       chrome.storage.local.set({ notion_pages: pages }, () => {
