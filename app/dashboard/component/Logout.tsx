@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function LogoutButton() {
   const router = useRouter();
   const handleLogout = async () => {
-    const response = await axios.get("http://localhost:3000/api/oauth/logout");
+    const response = await axios.get("/api/oauth/logout");
     router.push("/");
   };
   return (

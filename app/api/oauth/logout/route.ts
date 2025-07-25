@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const response = NextResponse.redirect(new URL("/", "http://localhost:3000"));
-  //redir not working
-  response.cookies.delete("notion_id");
-  return response;
+  try {
+    const response = NextResponse.json({ success: true }, { status: 200 });
+    response.cookies.delete("notion_id");
+    return response;
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error During Logout?" },
+      { status: 500 }
+    );
+  }
 }

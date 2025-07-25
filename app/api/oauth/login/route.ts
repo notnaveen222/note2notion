@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
     response_type: "code",
     owner: "user",
   });
+
   const notionAuthURL = `https://api.notion.com/v1/oauth/authorize?${params.toString()}`; //also present in .env, check that
   return NextResponse.redirect(notionAuthURL);
 }

@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [userDetails, setUserDetails] = useState<userDetails | null>(null);
   useEffect(() => {
     axios
-      .get("/api/user-details")
+      .get("/api/notion/user-details")
       .then((res: any) => setUserDetails(res.data))
       .catch((err) => {
         console.error("Error fetching user:", err);
