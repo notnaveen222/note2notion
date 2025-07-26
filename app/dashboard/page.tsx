@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import LogoutButton from "./component/Logout";
 import axios from "axios";
+import defaultProfile from "@/public/default_avatar.png";
 
 const sampleData = {
   name: "Naveen",
@@ -21,7 +22,12 @@ export default function Dashboard() {
   useEffect(() => {
     axios
       .get("/api/notion/user-details")
-      .then((res: any) => setUserDetails(res.data))
+      .then((res: any) => {
+        if (res.data.avatar_url == null) {
+          res.data.avatar_url = defaultProfile.src;
+        }
+        setUserDetails(res.data);
+      })
       .catch((err) => {
         console.error("Error fetching user:", err);
         setUserDetails(null);

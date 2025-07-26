@@ -1,3 +1,12 @@
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("Extension installed — setting up context menu");
+  refreshContextMenu();
+});
+chrome.runtime.onStartup.addListener(() => {
+  console.log("Extension started — refreshing context menu");
+  refreshContextMenu();
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "REFRESH_CONTEXT_MENUS") {
     refreshContextMenu();
@@ -15,6 +24,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 async function handleNoteToNotion(info) {
   const selectedText = info.selectionText;
+  console.log("selectedText: ", selectedText);
   const pageId = info.menuItemId;
 
   const notion_id = await new Promise((resolve) => {

@@ -1,8 +1,40 @@
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import chromeIcon from "@/public/icons/chrome.png";
 export default function Home() {
   return (
-    <div>
+    <div className="h-screen w-screen px-6 pb-20 ">
       <Navbar />
+      <div className="hero-bg h-full w-full rounded-b-3xl">
+        <div className="flex grow pt-72 text-white items-center flex-col">
+          <div
+            className="text-white items-center border border-hero-border rounded-full flex
+         gap-x-2 px-2 py-1 mb-3"
+          >
+            <Image
+              className="size-5"
+              src={chromeIcon}
+              alt="chrome icon"
+              height={24}
+              width={24}
+            />{" "}
+            Now Available in Chrome
+          </div>
+          <div className="text-center text-6xl font-semibold mb-5">
+            Your Browser to Notion, <br />
+            Seamlessly
+          </div>
+          <div className="text-center text-white mb-5  tracking-wide">
+            Highlight any text on the web and send it directly to your Notion
+            workspace.
+          </div>
+          <div className="flex gap-x-5">
+            <button className="border-2 border-white cursor-pointer hover:bg-white hover:text-black transition-all duration-150 rounded-full px-4 text-xl py-2">
+              Add To Chrome
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

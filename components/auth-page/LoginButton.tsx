@@ -9,7 +9,7 @@ export default function NotionLoginButton() {
 
   return (
     <button
-      className="w-full flex items-center border-2 border-white/65 hover:border-white justify-center text-white py-1 mb-2 gap-x-2 text-sm font-semibold rounded-lg cursor-pointer transition-all duration-150 "
+      className="w-full flex items-center border-2 border-white/65 hover:border-white justify-center text-white py-1 mb-2 gap-x-2 text-sm font-semibold rounded-lg cursor-pointer transition-all duration-250 backdrop-blur-lg hover:backdrop-blur-none"
       onClick={handleNotionLogin}
     >
       <Image
